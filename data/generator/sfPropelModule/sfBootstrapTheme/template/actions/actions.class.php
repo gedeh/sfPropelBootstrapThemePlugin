@@ -22,7 +22,6 @@ abstract class <?php echo $this->getGeneratedModuleName() ?>Actions extends <?ph
     }
 
     $this->dispatcher->notify(new sfEvent($this, 'admin.pre_execute', array('configuration' => $this->configuration)));
-
     $this->helper = new <?php echo $this->getModuleName() ?>GeneratorHelper();
   }
 
@@ -55,5 +54,13 @@ abstract class <?php echo $this->getGeneratedModuleName() ?>Actions extends <?ph
 <?php include dirname(__FILE__).'/../../parts/paginationAction.php' ?>
 
 <?php include dirname(__FILE__).'/../../parts/sortingAction.php' ?>
+<?php if ($this->hasBehavior('sortable')): ?>
+<?php include dirname(__FILE__).'/../../parts/moveUpAction.php' ?>
 
+<?php include dirname(__FILE__).'/../../parts/moveDownAction.php' ?>
+<?php endif ?>
+
+  protected function configureForm()
+  {
+  }
 }

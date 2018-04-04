@@ -4,26 +4,30 @@
     if ($form->isValid())
     {
       $notice = $form->getObject()->isNew() ? 'The item was created successfully.' : 'The item was updated successfully.';
-
+      $this->preSaveForm($request, $form);
       $<?php echo $this->getSingularName() ?> = $form->save();
-
       $this->dispatcher->notify(new sfEvent($this, 'admin.save_object', array('object' => $<?php echo $this->getSingularName() ?>)));
+      $this->postSaveForm($request, $form);
 
       if ($request->hasParameter('_save_and_add'))
       {
         $this->getUser()->setFlash('notice', $notice.' You can add another one below.');
-
         $this->redirect('@<?php echo $this->getUrlForAction('new') ?>');
       }
       else
       {
         $this->getUser()->setFlash('notice', $notice);
-
-        $this->redirect(array('sf_route' => '<?php echo $this->getUrlForAction('list') ?>', 'sf_subject' => $<?php echo $this->getSingularName() ?>));
+        $this->redirect(array('sf_route' => '<?php echo $this->getUrlForAction('edit') ?>', 'sf_subject' => $<?php echo $this->getSingularName() ?>));
       }
     }
     else
     {
       $this->getUser()->setFlash('error', 'The item has not been saved due to some errors.', false);
     }
+  }
+
+  protected function preSaveForm(sfWebRequest $request, sfForm $form) {
+  }
+
+  protected function postSaveForm(sfWebRequest $request, sfForm $form) {
   }

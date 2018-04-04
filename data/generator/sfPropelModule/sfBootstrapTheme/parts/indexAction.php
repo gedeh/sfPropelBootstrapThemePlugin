@@ -1,7 +1,13 @@
   public function executeIndex(sfWebRequest $request)
   {
+    // filtering
+    if ($request->getParameter('filters'))
+    {
+      $this->setFilters($request->getParameter('filters'));
+    }
+
     // sorting
-    if ($request->getParameter('sort') && $this->isValidSortColumn($request->getParameter('sort')))
+    if ($request->getParameter('sort'))
     {
       $this->setSort(array($request->getParameter('sort'), $request->getParameter('sort_type')));
     }

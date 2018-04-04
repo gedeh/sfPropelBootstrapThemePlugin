@@ -1,17 +1,14 @@
 [?php use_helper('I18N', 'Date') ?]
 [?php include_partial('<?php echo $this->getModuleName() ?>/assets') ?]
 
-  <div class="span<?php echo $this->configuration->getValue('template.span') ?>" id="content">
-    <h1>[?php echo <?php echo $this->getI18NString('edit.title') ?> ?]</h1>
-
-    <div class="row-fluid">
-      <div class="span12">
-        [?php include_partial('<?php echo $this->getModuleName() ?>/flashes') ?]
-      </div>
+  <section <?php if ($this->configuration->getValue('template.span') != 0): ?>class="span<?php echo $this->configuration->getValue('template.span') ?>"<?php endif ?> id="content">
+    <div class="page-header">
+      <h1>[?php echo <?php echo $this->getI18NString('edit.title') ?> ?]</h1>
     </div>
 
     <div class="row-fluid">
       <div class="span12">
+        [?php include_partial('<?php echo $this->getModuleName() ?>/flashes') ?]
         [?php include_partial('<?php echo $this->getModuleName() ?>/form_header', array('<?php echo $this->getSingularName() ?>' => $<?php echo $this->getSingularName() ?>, 'form' => $form, 'configuration' => $configuration)) ?]
       </div>
     </div>
@@ -28,4 +25,4 @@
       </div>
     </div>
 
-  </div>
+  </section>

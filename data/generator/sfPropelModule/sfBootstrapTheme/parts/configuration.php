@@ -45,15 +45,15 @@ abstract class Base<?php echo ucfirst($this->getModuleName()) ?>GeneratorConfigu
 
 <?php include dirname(__FILE__).'/sortingConfiguration.php' ?>
 
-  public function getPeerMethod()
+  public function getWiths()
   {
-    return '<?php echo isset($this->config['list']['peer_method']) ? $this->config['list']['peer_method'] : 'doSelect' ?>';
-<?php unset($this->config['list']['peer_method']) ?>
+    return <?php echo $this->asPhp(isset($this->config['list']['with']) ? $this->config['list']['with'] : array()) ?>;
+<?php unset($this->config['list']['with']) ?>
   }
 
-  public function getPeerCountMethod()
+  public function getQueryMethods()
   {
-    return '<?php echo isset($this->config['list']['peer_count_method']) ? $this->config['list']['peer_count_method'] : 'doCount' ?>';
-<?php unset($this->config['list']['peer_count_method']) ?>
+    return <?php echo $this->asPhp(isset($this->config['list']['query_methods']) ? $this->config['list']['query_methods'] : array()) ?>;
+<?php unset($this->config['list']['query_methods']) ?>
   }
 }

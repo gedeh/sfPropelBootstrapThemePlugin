@@ -1,15 +1,16 @@
 [?php use_helper('I18N', 'Date') ?]
 [?php include_partial('<?php echo $this->getModuleName() ?>/assets') ?]
 
-  <div class="span<?php echo $this->configuration->getValue('template.span') ?>" id="content">
-    <h1>[?php echo <?php echo $this->getI18NString('list.title') ?> ?]</h1>
+  <section <?php if ($this->configuration->getValue('template.span') != 0): ?>class="span<?php echo $this->configuration->getValue('template.span') ?>"<?php endif ?> id="content">
+    <div class="page-header">
+      <h1>[?php echo <?php echo $this->getI18NString('list.title') ?> ?]</h1>
+    </div>
 
     [?php include_partial('<?php echo $this->getModuleName() ?>/flashes') ?]
 
     <div class="row-fluid">
       <div class="span12">
 
-        <?php if ($this->configuration->hasFilterForm()): ?>
         <div class="row-fluid">
           <div class="span12">
             <div class="btn-toolbar">
@@ -18,7 +19,6 @@
             </div>
           </div>
         </div>
-        <?php endif; ?>
 
         <div class="row-fluid">
           [?php include_partial('<?php echo $this->getModuleName() ?>/list_header', array('pager' => $pager)) ?]
@@ -46,7 +46,6 @@
           [?php include_partial('<?php echo $this->getModuleName() ?>/list_footer', array('pager' => $pager)) ?]
         </div>
 
-
       </div> <!-- <div class="span12"> -->
     </div> <!-- <div class="row-fluid"> -->
-  </div> <!-- <div id="content"> -->
+  </section> <!-- <section id="content"> -->

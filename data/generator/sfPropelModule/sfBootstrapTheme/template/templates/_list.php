@@ -1,5 +1,8 @@
   [?php if (!$pager->getNbResults()): ?]
-    <p>[?php echo __('No result', array(), 'sf_admin') ?]</p>
+  <div class="alert alert-block alert-info" style="margin-top: 10px;">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    [?php echo __('No result', array(), 'sf_admin') ?]
+  </div>
   [?php else: ?]
     <table class="table table-hover table-striped">
       <thead>
@@ -9,7 +12,7 @@
 <?php endif; ?>
           [?php include_partial('<?php echo $this->getModuleName() ?>/list_th_<?php echo $this->configuration->getValue('list.layout') ?>', array('sort' => $sort)) ?]
 <?php if ($this->configuration->getValue('list.object_actions')): ?>
-          <th id="sf_admin_list_th_actions">[?php echo __('Actions', array(), 'sf_admin') ?]</th>
+          <th id="sf_admin_list_th_actions"><div class="btn btn-link">[?php echo __('Actions', array(), 'sf_admin') ?]</div></th>
 <?php endif; ?>
         </tr>
       </thead>
@@ -37,10 +40,9 @@
         [?php endforeach; ?]
       </tbody>
     </table>
-            [?php if ($pager->haveToPaginate()): ?]
-              [?php include_partial('<?php echo $this->getModuleName() ?>/pagination', array('pager' => $pager)) ?]
-            [?php endif; ?]
-
+    [?php if ($pager->haveToPaginate()): ?]
+    [?php include_partial('<?php echo $this->getModuleName() ?>/pagination', array('pager' => $pager)) ?]
+    [?php endif; ?]
   [?php endif; ?]
   
 <script type="text/javascript">

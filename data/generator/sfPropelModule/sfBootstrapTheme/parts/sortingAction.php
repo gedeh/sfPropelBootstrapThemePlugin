@@ -1,31 +1,66 @@
-  protected function addSortCriteria($criteria)
+<?php
+$customSorts = array();
+foreach ($this->configuration->getValue('list.display') as $name => $field)
+{
+  if ($customSort = $field->getConfig('sort_method', false, false))
   {
-    if (array(null, null) == ($sort = $this->getSort()))
+    $customSorts[$name] = $customSort;
+  }
+}
+?>
+
+  protected function processSort($query)
+  {
+    $sort = $this->getSort();
+    if (array(null, null) == $sort)
     {
       return;
     }
 
-    $column = <?php echo constant($this->getModelClass().'::PEER') ?>::translateFieldName($sort[0], BasePeer::TYPE_FIELDNAME, BasePeer::TYPE_COLNAME);
-    if ('asc' == $sort[1])
+<?php if ($customSorts): ?>
+    $customSorts = $this->getCustomSorts();
+    if (isset($customSorts[$sort[0]]))
     {
-      $criteria->addAscendingOrderByColumn($column);
+      $method = $customSorts[$sort[0]];
+      $query->$method('asc' == $sort[1] ? 'asc' : 'desc');
+      return;
     }
-    else
+
+<?php endif ?>
+    try
     {
-      $criteria->addDescendingOrderByColumn($column);
+      $column = <?php echo constant($this->getModelClass().'::PEER') ?>::translateFieldName($sort[0], BasePeer::TYPE_FIELDNAME, BasePeer::TYPE_PHPNAME);
+    }
+    catch (PropelException $e)
+    {
+      // probably a fake column, using a custom orderByXXX() query method
+      $column = sfInflector::camelize($sort[0]);
+    }
+
+    $method = sprintf('orderBy%s', $column);
+
+    try
+    {
+      $query->$method('asc' == $sort[1] ? 'asc' : 'desc');
+    }
+    catch(PropelException $e)
+    {
+      // non-existent sorting method
+      // ignore the sort parameter
+      $this->setSort(array(null, null));
     }
   }
 
   protected function getSort()
   {
-    if (null !== $sort = $this->getUser()->getAttribute('<?php echo $this->getModuleName() ?>.sort', null, 'admin_module'))
+    $sort = $this->getUser()->getAttribute('<?php echo $this->getModuleName() ?>.sort', null, 'admin_module');
+    if (null === $sort)
     {
-      return $sort;
+      $sort = $this->configuration->getDefaultSort();
+      $this->setSort($sort);
     }
 
-    $this->setSort($this->configuration->getDefaultSort());
-
-    return $this->getUser()->getAttribute('<?php echo $this->getModuleName() ?>.sort', null, 'admin_module');
+    return $sort;
   }
 
   protected function setSort(array $sort)
@@ -38,7 +73,9 @@
     $this->getUser()->setAttribute('<?php echo $this->getModuleName() ?>.sort', $sort, 'admin_module');
   }
 
-  protected function isValidSortColumn($column)
+<?php if ($customSorts): ?>
+  protected function getCustomSorts()
   {
-    return in_array($column, BasePeer::getFieldnames('<?php echo $this->getModelClass() ?>', BasePeer::TYPE_FIELDNAME));
+    return <?php echo $this->asPhp($customSorts) ?>;
   }
+<?php endif ?>

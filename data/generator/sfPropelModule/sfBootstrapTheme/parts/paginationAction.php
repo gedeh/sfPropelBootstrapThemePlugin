@@ -1,12 +1,8 @@
   protected function getPager()
   {
-    $pager = $this->configuration->getPager('<?php echo $this->getModelClass() ?>');
-    $pager->setCriteria($this->buildCriteria());
-    $pager->setPage($this->getPage());
-    $pager->setPeerMethod($this->configuration->getPeerMethod());
-    $pager->setPeerCountMethod($this->configuration->getPeerCountMethod());
-    $pager->init();
-
+    $query = $this->buildQuery();
+    $paginateMethod = $this->configuration->getPaginateMethod();
+    $pager = $query->$paginateMethod($this->getPage(), $this->configuration->getPagerMaxPerPage());
     return $pager;
   }
 
@@ -20,23 +16,37 @@
     return $this->getUser()->getAttribute('<?php echo $this->getModuleName() ?>.page', 1, 'admin_module');
   }
 
-  protected function buildCriteria()
+  protected function buildQuery()
   {
 <?php if ($this->configuration->hasFilterForm()): ?>
     if (null === $this->filters)
     {
       $this->filters = $this->configuration->getFilterForm($this->getFilters());
+<?php echo $this->getFormCustomization('filter', 'filters') ?>
     }
 
-    $criteria = $this->filters->buildCriteria($this->getFilters());
+    $query = $this->filters->buildCriteria($this->getFilters());
 <?php else: ?>
-    $criteria = new Criteria();
+    $query = PropelQuery::from('<?php echo $this->getModelClass() ?>');
 <?php endif; ?>
 
-    $this->addSortCriteria($criteria);
+    foreach ($this->configuration->getWiths() as $with) {
+      $query->joinWith($with);
+    }
 
-    $event = $this->dispatcher->filter(new sfEvent($this, 'admin.build_criteria'), $criteria);
-    $criteria = $event->getReturnValue();
+    foreach ($this->configuration->getQueryMethods() as $methodName => $methodParams) {
+      if(is_array($methodParams))
+      {
+        call_user_func_array(array($query, $methodName), $methodParams);
+      }
+      else
+      {
+        $query->$methodParams();
+      }
+    }
 
-    return $criteria;
+    $this->processSort($query);
+    $event = $this->dispatcher->filter(new sfEvent($this, 'admin.build_criteria'), $query);
+    $query = $event->getReturnValue();
+    return $query;
   }

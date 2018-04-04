@@ -1,7 +1,7 @@
-  public function getPagerClass()
+  public function getPaginateMethod()
   {
-    return '<?php echo isset($this->config['list']['pager_class']) ? $this->config['list']['pager_class'] : 'sfPropelPager' ?>';
-<?php unset($this->config['list']['pager_class']) ?>
+    return '<?php echo isset($this->config['list']['paginate_method']) ? $this->config['list']['paginate_method'] : 'paginate' ?>';
+<?php unset($this->config['list']['paginate_method']) ?>
   }
 
   public function getPagerMaxPerPage()

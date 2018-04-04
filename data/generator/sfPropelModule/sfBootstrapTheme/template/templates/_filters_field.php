@@ -9,9 +9,11 @@
 
         [?php echo $form[$name]->render($attributes instanceof sfOutputEscaper ? $attributes->getRawValue() : $attributes) ?]
 
-        <span class="help-inline" generated="true"> <!--for="pwd"-->
+        [?php if ($form[$name]->hasError()): ?]
+        <span class="help-inline" generated="true">
         [?php echo $form[$name]->renderError() ?]
         </span>
+        [?php endif; ?]
 
         [?php if ($help || $help = $form[$name]->renderHelp()): ?]
           <span class="help-block">[?php echo __($help, array(), '<?php echo $this->getI18nCatalogue() ?>') ?]</span>
