@@ -13,5 +13,5 @@ TBD
 Twitter Bootstrap version 2.1.0, jquery 1.8.1, symfony 1.4, and propel 1.6.8
 
 ## Contributors
-* Luciano Coggiola <tanoinc@gmail.com>
-* Gede Hendra Saputra <nazklenknani@gmail.com>
+* [Luciano Coggiola]<tanoinc@gmail.com>
+* [Gede Hendra Saputra](https://github.com/gedeh)
