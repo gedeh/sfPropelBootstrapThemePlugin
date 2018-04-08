@@ -3,21 +3,25 @@
 [?php elseif ($field->isComponent()): ?]
   [?php include_component('<?php echo $this->getModuleName() ?>', $name, array('type' => 'filter', 'form' => $form, 'attributes' => $attributes instanceof sfOutputEscaper ? $attributes->getRawValue() : $attributes)) ?]
 [?php else: ?]
-  <div class="control-group [?php echo $class ?]">
+  <div class="form-group [?php echo $class ?]">
       [?php echo $form[$name]->renderLabel($label, array('class'=> 'control-label')) ?]
-      <div class="controls">
 
-        [?php echo $form[$name]->render($attributes instanceof sfOutputEscaper ? $attributes->getRawValue() : $attributes) ?]
+      [?php if ($attributes instanceof sfOutputEscaper): ?]
+        [?php $field_attributes = $attributes->getRawValue(); ?]
+      [?php else: ?]
+        [?php $field_attributes = $attributes; ?]
+      [?php endif ?]
+      [?php $field_attributes['class'] = 'form-control' ?]
+      [?php echo $form[$name]->render($field_attributes) ?]
 
-        [?php if ($form[$name]->hasError()): ?]
-        <span class="help-inline" generated="true">
-        [?php echo $form[$name]->renderError() ?]
-        </span>
-        [?php endif; ?]
-
-        [?php if ($help || $help = $form[$name]->renderHelp()): ?]
-          <span class="help-block">[?php echo __($help, array(), '<?php echo $this->getI18nCatalogue() ?>') ?]</span>
-        [?php endif; ?]
+      [?php if ($form[$name]->hasError()): ?]
+      <div class="invalid-feedback" generated="true">
+      [?php echo $form[$name]->renderError() ?]
       </div>
+      [?php endif; ?]
+
+      [?php if ($help || $help = $form[$name]->renderHelp()): ?]
+      <small class="form-text text-muted">[?php echo __($help, array(), '<?php echo $this->getI18nCatalogue() ?>') ?]</span>
+      [?php endif; ?]
   </div>
 [?php endif; ?]
