@@ -32,7 +32,7 @@ abstract class sfModelBootstrapGeneratorHelper extends sfModelGeneratorHelper
       return (in_array($params['size'], $this->button_sizes) ? $params['size'] : $default );
     }
   }
-  
+
   public function linkToNew($params)
   {
     $params['icon'] = $this->defaultIcon($params, 'icon-plus');
@@ -51,8 +51,8 @@ abstract class sfModelBootstrapGeneratorHelper extends sfModelGeneratorHelper
     $params['size'] = $this->defaultSize($params, 'btn-small');
     $title = __($params['label'], array(), 'sf_admin');
     $label = (!$params['only_icon'] ? ' '. $title : '' );
-    
-    return link_to('<i class="'.$params['icon'].'"></i>'.$label, $this->getUrlForAction('edit'), $object, array('title'=> $title, 'class'=>'btn '.$params['size']));
+
+    return link_to('<i class="'.$params['icon'].'"></i>'.$label, $this->getUrlForAction('edit'), $object, array('title'=> $title, 'class'=>'btn btn-primary '.$params['size']));
   }
 
   public function linkToDelete($object, $params)
@@ -93,6 +93,6 @@ abstract class sfModelBootstrapGeneratorHelper extends sfModelGeneratorHelper
       return '';
     }
 
-    return '<input class="btn" type="submit" value="'.__($params['label'], array(), 'sf_admin').'" name="_save_and_add" />';
+    return '<input class="btn btn-outline-primary" type="submit" value="'.__($params['label'], array(), 'sf_admin').'" name="_save_and_add" />';
   }
 }

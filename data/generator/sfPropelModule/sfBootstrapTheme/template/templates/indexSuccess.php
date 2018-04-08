@@ -21,26 +21,32 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row mt-3">
       <div class="col">
-      <?php if ($this->configuration->getValue('list.batch_actions')): ?>
-          <form class="form-inline" action="[?php echo url_for('<?php echo $this->getUrlForAction('collection') ?>', array('action' => 'batch')) ?]" method="post">
-      <?php endif; ?>
-          [?php include_partial('<?php echo $this->getModuleName() ?>/list', array('pager' => $pager, 'sort' => $sort, 'helper' => $helper)) ?]
-          <!--div class="form-actions"-->
+        <?php if ($this->configuration->getValue('list.batch_actions')): ?>
+        <form class="form-inline" action="[?php echo url_for('<?php echo $this->getUrlForAction('collection') ?>', array('action' => 'batch')) ?]" method="post">
+        <?php endif; ?>
+        [?php include_partial('<?php echo $this->getModuleName() ?>/list', array('pager' => $pager, 'sort' => $sort, 'helper' => $helper)) ?]
+        <div class="row mt-3">
+          <div class="col">
+            <!--div class="form-actions"-->
             <div class="btn-toolbar" role="toolbar">
             [?php include_partial('<?php echo $this->getModuleName() ?>/list_batch_actions', array('helper' => $helper)) ?]
             [?php include_partial('<?php echo $this->getModuleName() ?>/list_actions', array('helper' => $helper)) ?]
             </div>
-          <!--/div-->
-      <?php if ($this->configuration->getValue('list.batch_actions')): ?>
-          </form>
-      <?php endif; ?>
+          </div>
+        </div>
+            <!--/div-->
+        <?php if ($this->configuration->getValue('list.batch_actions')): ?>
+        </form>
+        <?php endif; ?>
       </div>
     </div>
 
-    <div class="row">
-      [?php include_partial('<?php echo $this->getModuleName() ?>/list_footer', array('pager' => $pager)) ?]
+    <div class="row mt-3">
+      <div class="col">
+        [?php include_partial('<?php echo $this->getModuleName() ?>/list_footer', array('pager' => $pager)) ?]
+      </div>
     </div>
 
   </section> <!-- <section id="content"> -->
