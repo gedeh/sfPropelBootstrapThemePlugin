@@ -1,51 +1,47 @@
 [?php use_helper('I18N', 'Date') ?]
 [?php include_partial('<?php echo $this->getModuleName() ?>/assets') ?]
 
-  <section <?php if ($this->configuration->getValue('template.span') != 0): ?>class="span<?php echo $this->configuration->getValue('template.span') ?>"<?php endif ?> id="content">
-    <div class="page-header">
-      <h1>[?php echo <?php echo $this->getI18NString('list.title') ?> ?]</h1>
+<div class="row">
+  <section class="col<?php if ($this->configuration->getValue('template.span') != 0): ?>-<?php echo $this->configuration->getValue('template.span') ?><?php endif ?>" id="content">
+
+    <div class="row">
+      <div class="col">
+        <h1>[?php echo <?php echo $this->getI18NString('list.title') ?> ?]</h1>
+      </div>
     </div>
 
     [?php include_partial('<?php echo $this->getModuleName() ?>/flashes') ?]
 
-    <div class="row-fluid">
-      <div class="span12">
+    <div class="row">
+      <div class="col">
+        <div class="btn-toolbar" role="toolbar">
+          [?php include_partial('<?php echo $this->getModuleName() ?>/filters', array('form' => $filters, 'configuration' => $configuration)) ?]
+          [?php include_partial('<?php echo $this->getModuleName() ?>/list_actions', array('helper' => $helper)) ?]
+        </div>
+      </div>
+    </div>
 
-        <div class="row-fluid">
-          <div class="span12">
-            <div class="btn-toolbar">
-              [?php include_partial('<?php echo $this->getModuleName() ?>/filters', array('form' => $filters, 'configuration' => $configuration)) ?]
-              [?php include_partial('<?php echo $this->getModuleName() ?>/list_actions', array('helper' => $helper)) ?]
+    <div class="row">
+      <div class="col">
+      <?php if ($this->configuration->getValue('list.batch_actions')): ?>
+          <form class="form-inline" action="[?php echo url_for('<?php echo $this->getUrlForAction('collection') ?>', array('action' => 'batch')) ?]" method="post">
+      <?php endif; ?>
+          [?php include_partial('<?php echo $this->getModuleName() ?>/list', array('pager' => $pager, 'sort' => $sort, 'helper' => $helper)) ?]
+          <!--div class="form-actions"-->
+            <div class="btn-toolbar" role="toolbar">
+            [?php include_partial('<?php echo $this->getModuleName() ?>/list_batch_actions', array('helper' => $helper)) ?]
+            [?php include_partial('<?php echo $this->getModuleName() ?>/list_actions', array('helper' => $helper)) ?]
             </div>
-          </div>
-        </div>
+          <!--/div-->
+      <?php if ($this->configuration->getValue('list.batch_actions')): ?>
+          </form>
+      <?php endif; ?>
+      </div>
+    </div>
 
-        <div class="row-fluid">
-          [?php include_partial('<?php echo $this->getModuleName() ?>/list_header', array('pager' => $pager)) ?]
-        </div>
+    <div class="row">
+      [?php include_partial('<?php echo $this->getModuleName() ?>/list_footer', array('pager' => $pager)) ?]
+    </div>
 
-        <div class="row-fluid">
-          <div class="span12">
-          <?php if ($this->configuration->getValue('list.batch_actions')): ?>
-              <form class="form-inline" action="[?php echo url_for('<?php echo $this->getUrlForAction('collection') ?>', array('action' => 'batch')) ?]" method="post">
-          <?php endif; ?>
-              [?php include_partial('<?php echo $this->getModuleName() ?>/list', array('pager' => $pager, 'sort' => $sort, 'helper' => $helper)) ?]
-              <!--div class="form-actions"-->
-                <div class="btn-toolbar">
-                [?php include_partial('<?php echo $this->getModuleName() ?>/list_batch_actions', array('helper' => $helper)) ?]
-                [?php include_partial('<?php echo $this->getModuleName() ?>/list_actions', array('helper' => $helper)) ?]
-                </div>
-              <!--/div-->
-          <?php if ($this->configuration->getValue('list.batch_actions')): ?>
-              </form>
-          <?php endif; ?>
-          </div>
-        </div>
-
-        <div class="row-fluid">
-          [?php include_partial('<?php echo $this->getModuleName() ?>/list_footer', array('pager' => $pager)) ?]
-        </div>
-
-      </div> <!-- <div class="span12"> -->
-    </div> <!-- <div class="row-fluid"> -->
   </section> <!-- <section id="content"> -->
+</div>
