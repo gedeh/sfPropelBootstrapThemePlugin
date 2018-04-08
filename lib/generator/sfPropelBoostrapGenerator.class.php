@@ -48,10 +48,10 @@ class sfPropelBoostrapGenerator extends sfPropelGenerator
     $url_params = $pk_link ? '?'.$this->getPrimaryKeyUrlParams() : '\'';
 
     $params['icon'] = (isset($params['icon'])? $params['icon'] : 'icon-th-list');
-    $params['params']['class'] = (isset($params['params']['class'])? $params['params']['class'] : 'btn');
+    $params['class'] = (isset($params['class'])? $params['class'] : 'btn');
     $params['only_icon'] = (isset($params['only_icon']) ? $params['only_icon'] : true);
     $params['size'] = $this->defaultSize($params);
-    $params['params']['class'] .= ' '.$params['size'];
+    $params['params']['class'] .= $params['class'].' '.$params['size'];
     $title = '__(\''.$params['label'].'\', array(), \''.$this->getI18nCatalogue().'\')';
     $label = (!$params['only_icon'] ? ' \'.'. $title : '\'' );
 
