@@ -1,18 +1,18 @@
   [?php if (!$pager->getNbResults()): ?]
-  <div class="alert alert-block alert-info" style="margin-top: 10px;">
-    <button type="button" class="close" data-dismiss="alert">×</button>
+  <div class="alert alert-info" role="alert">
     [?php echo __('No result', array(), 'sf_admin') ?]
   </div>
   [?php else: ?]
+  <div class="table-responsive">
     <table class="table table-hover table-striped">
-      <thead>
+      <thead class="thead-light">
         <tr>
 <?php if ($this->configuration->getValue('list.batch_actions')): ?>
-          <th id="sf_admin_list_batch_actions"><input id="sf_admin_list_batch_checkbox" type="checkbox" onclick="checkAll();" /></th>
+          <th scope="col" id="sf_admin_list_batch_actions"><input id="sf_admin_list_batch_checkbox" type="checkbox" onclick="checkAll();" /></th>
 <?php endif; ?>
           [?php include_partial('<?php echo $this->getModuleName() ?>/list_th_<?php echo $this->configuration->getValue('list.layout') ?>', array('sort' => $sort)) ?]
 <?php if ($this->configuration->getValue('list.object_actions')): ?>
-          <th id="sf_admin_list_th_actions"><div class="btn btn-link">[?php echo __('Actions', array(), 'sf_admin') ?]</div></th>
+          <th scope="col" id="sf_admin_list_th_actions">[?php echo __('Actions', array(), 'sf_admin') ?]</th>
 <?php endif; ?>
         </tr>
       </thead>
@@ -40,16 +40,17 @@
         [?php endforeach; ?]
       </tbody>
     </table>
+  </div>
     [?php if ($pager->haveToPaginate()): ?]
     [?php include_partial('<?php echo $this->getModuleName() ?>/pagination', array('pager' => $pager)) ?]
     [?php endif; ?]
   [?php endif; ?]
-  
+
 <script type="text/javascript">
-/* <![CDATA[ */
-function checkAll()
-{
-  var boxes = document.getElementsByTagName('input'); for(var index = 0; index < boxes.length; index++) { box = boxes[index]; if (box.type == 'checkbox' && box.className == 'sf_admin_batch_checkbox') box.checked = document.getElementById('sf_admin_list_batch_checkbox').checked } return true;
-}
-/* ]]> */
+  /* <![CDATA[ */
+  function checkAll()
+  {
+    var boxes = document.getElementsByTagName('input'); for(var index = 0; index < boxes.length; index++) { box = boxes[index]; if (box.type == 'checkbox' && box.className == 'sf_admin_batch_checkbox') box.checked = document.getElementById('sf_admin_list_batch_checkbox').checked } return true;
+  }
+  /* ]]> */
 </script>
