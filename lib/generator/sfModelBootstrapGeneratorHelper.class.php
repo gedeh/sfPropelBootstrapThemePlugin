@@ -78,7 +78,7 @@ abstract class sfModelBootstrapGeneratorHelper extends sfModelGeneratorHelper
     $title = __($params['label'], array(), 'sf_admin');
     $label = (!$params['only_icon'] ? ' '. $title : '' );
 
-    return link_to('<i class="'.$params['icon'].'"></i>'.$label, '@'.$this->getUrlForAction('list'), array('title' => $title, 'class'=>'btn '.$params['size']));
+    return link_to('<i class="'.$params['icon'].'"></i>'.$label, '@'.$this->getUrlForAction('list'), array('title' => $title, 'class'=>'btn btn-outline-primary '.$params['size']));
   }
 
   public function linkToSave($object, $params)
@@ -94,5 +94,12 @@ abstract class sfModelBootstrapGeneratorHelper extends sfModelGeneratorHelper
     }
 
     return '<input class="btn btn-outline-primary" type="submit" value="'.__($params['label'], array(), 'sf_admin').'" name="_save_and_add" />';
+  }
+
+  public function renderFormField($field, $attributes)
+  {
+    if ($attributes instanceof sfOutputEscaper) $attributes = $attributes->getRawValue();
+    $attributes['class'] = 'form-control'.' '.$attributes['class'];
+    return $field->render($attributes);
   }
 }

@@ -7,7 +7,7 @@
 <?php endif; ?>
 
 <?php foreach (array('left', 'right') as $side): ?>
-<div class="btn-group pull-<?php echo $side ?>">
+<div class="btn-group float-<?php echo $side ?>">
 <?php foreach ($this->configuration->getValue($action.'.actions') as $name => $params): ?>
 <?php if (isset($params['upper']) and isset($params['upper'][$side]) and $params['upper'][$side] === true ): ?>
 <?php if ('_delete' == $name): ?>

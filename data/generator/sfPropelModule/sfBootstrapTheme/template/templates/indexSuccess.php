@@ -15,7 +15,7 @@
     <div class="row">
       <div class="col">
         <div class="btn-toolbar" role="toolbar">
-          [?php include_partial('<?php echo $this->getModuleName() ?>/filters', array('form' => $filters, 'configuration' => $configuration)) ?]
+          [?php include_partial('<?php echo $this->getModuleName() ?>/filters', array('form' => $filters, 'configuration' => $configuration, 'helper' => $helper)) ?]
           [?php include_partial('<?php echo $this->getModuleName() ?>/list_actions', array('helper' => $helper)) ?]
         </div>
       </div>

@@ -6,13 +6,7 @@
   <div class="form-group [?php echo $class ?]">
       [?php echo $form[$name]->renderLabel($label, array('class'=> 'control-label')) ?]
 
-      [?php if ($attributes instanceof sfOutputEscaper): ?]
-        [?php $field_attributes = $attributes->getRawValue(); ?]
-      [?php else: ?]
-        [?php $field_attributes = $attributes; ?]
-      [?php endif ?]
-      [?php $field_attributes['class'] = 'form-control' ?]
-      [?php echo $form[$name]->render($field_attributes) ?]
+      [?php echo $helper->renderFormField($form[$name], $attributes) ?]
 
       [?php if ($form[$name]->hasError()): ?]
       <div class="invalid-feedback" generated="true">

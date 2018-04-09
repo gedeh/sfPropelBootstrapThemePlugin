@@ -25,7 +25,7 @@
 
         <div class="modal-body">
             [?php if ($form->hasGlobalErrors()): ?]
-            <div class="alert alert-error alert-dismissible">
+            <div class="alert alert-danger alert-dismissible">
 
               [?php echo $form->renderGlobalErrors() ?]
 
@@ -45,6 +45,7 @@
                 'form'       => $form,
                 'field'      => $field,
                 'class'      => 'sf_admin_form_row sf_admin_'.strtolower($field->getType()).' sf_admin_filter_field_'.$name,
+                'helper'     => $helper
               )) ?]
             [?php endforeach; ?]
         </div>
