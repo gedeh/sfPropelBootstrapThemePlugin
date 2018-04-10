@@ -1,4 +1,7 @@
+The MIT License (MIT)
+
 Copyright (c) 2012 Luciano Coggiola <tanoinc@gmail.com>
+Copyright (c) 2018 Gede Hendra Saputra <https://github.com/gedeh>
 
 Permission is hereby granted, free of charge, to any
 person obtaining a copy of this software and associated
