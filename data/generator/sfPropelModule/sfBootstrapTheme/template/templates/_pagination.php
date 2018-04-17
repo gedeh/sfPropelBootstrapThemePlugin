@@ -12,6 +12,8 @@
 
         <li class="page-item">
           <a class="page-link" href="[?php echo url_for('@<?php echo $this->getUrlForAction('list') ?>') ?]?page=[?php echo $pager->getPreviousPage() ?]" title="[?php echo __('Previous page', array(), 'sf_admin') ?]">
+            <span aria-hidden="true">&lsaquo;</span>
+            <span class="sr-only">[?php echo __('Previous page', array(), 'sf_admin') ?]</span>
             <i class="icon-backward"></i>
           </a>
         </li>
@@ -30,6 +32,8 @@
 
         <li class="page-item">
           <a class="page-link" href="[?php echo url_for('@<?php echo $this->getUrlForAction('list') ?>') ?]?page=[?php echo $pager->getNextPage() ?]" title="[?php echo __('Next page', array(), 'sf_admin') ?]">
+            <span aria-hidden="true">&rsaquo;</span>
+            <span class="sr-only">[?php echo __('Next page', array(), 'sf_admin') ?]</span>
             <i class="icon-forward"></i>
           </a>
         </li>
