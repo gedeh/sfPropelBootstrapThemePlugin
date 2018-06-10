@@ -72,7 +72,7 @@ abstract class sfModelBootstrapGeneratorHelper extends sfModelGeneratorHelper
 
   public function linkToList($params)
   {
-    $params['icon'] = $this->defaultIcon($params, 'fa-bar');
+    $params['icon'] = $this->defaultIcon($params, 'fa-bars');
     $params['only_icon'] = (isset($params['only_icon']) and $params['only_icon'] === true);
     $params['size'] = $this->defaultSize($params);
     $title = __($params['label'], array(), 'sf_admin');
