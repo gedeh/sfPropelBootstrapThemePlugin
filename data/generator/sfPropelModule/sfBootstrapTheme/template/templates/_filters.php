@@ -54,8 +54,10 @@
 
           [?php echo $form->renderHiddenFields() ?]
           <div class="btn-group" role="group" aria-label="Basic example">
-            [?php echo link_to('<i class="icon-refresh"></i> ' . __('Reset', array(), 'sf_admin'), '<?php echo $this->getUrlForAction('collection') ?>', array('action' => 'filter'), array('query_string' => '_reset', 'method' => 'post', 'class' => 'btn btn-secondary')) ?]
-            <input class="btn btn-primary" type="submit" value="[?php echo __('Search', array(), 'sf_admin') ?]" />
+            [?php echo link_to('<i class="fas fa-undo"></i> ' . __('Reset', array(), 'sf_admin'), '<?php echo $this->getUrlForAction('collection') ?>', array('action' => 'filter'), array('query_string' => '_reset', 'method' => 'post', 'class' => 'btn btn-secondary')) ?]
+            <button class="btn btn-primary" type="submit">
+              <i class="fas fa-search"></i> [?php echo __('Search', array(), 'sf_admin') ?]
+            </button>
           </div>
 
         </div>

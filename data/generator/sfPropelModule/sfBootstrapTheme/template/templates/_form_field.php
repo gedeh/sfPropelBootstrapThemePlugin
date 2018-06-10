@@ -10,7 +10,7 @@
 
       [?php echo $helper->renderFormField($form[$name], $attributes) ?]
       [?php if ($form[$name]->hasError()): ?]
-        <div class="invalid-feedback">[?php echo $form[$name]->renderError() ?]</div>
+        <div class="invalid-feedback d-block">[?php echo $form[$name]->renderError() ?]</div>
       [?php endif; ?]
 
       [?php if ($help): ?]

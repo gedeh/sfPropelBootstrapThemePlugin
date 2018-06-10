@@ -83,7 +83,7 @@ abstract class sfModelBootstrapGeneratorHelper extends sfModelGeneratorHelper
 
   public function linkToSave($object, $params)
   {
-    return '<input class="btn btn-primary" type="submit" value="'.__($params['label'], array(), 'sf_admin').'" />';
+    return '<button class="btn btn-primary" type="submit"><i class="fas fa-save"></i> '.__($params['label'], array(), 'sf_admin').'</button>';
   }
 
   public function linkToSaveAndAdd($object, $params)
@@ -100,6 +100,7 @@ abstract class sfModelBootstrapGeneratorHelper extends sfModelGeneratorHelper
   {
     if ($attributes instanceof sfOutputEscaper) $attributes = $attributes->getRawValue();
     $attributes['class'] = 'form-control'.' '.$attributes['class'];
+    if ($field->hasError()) $attributes['class'] = $attributes['class'].'is-invalid';
     return $field->render($attributes);
   }
 }
