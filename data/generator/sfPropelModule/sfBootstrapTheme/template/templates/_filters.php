@@ -2,7 +2,7 @@
 [?php use_javascripts_for_form($form) ?]
 <div class="btn-group mr-2" role="group" aria-label="[?php echo __('Search') ?]">
   <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#bootstrap-theme-filters">
-    <i class="icon icon-search"></i> [?php echo __('Search') ?]
+    <i class="fas fa-search"></i> [?php echo __('Search') ?]
   </a>
 </div>
 
