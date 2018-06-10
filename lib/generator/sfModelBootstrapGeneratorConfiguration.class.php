@@ -17,8 +17,14 @@ abstract class sfModelBootstrapGeneratorConfiguration extends sfModelGeneratorCo
       'template' => array(
           'span' => $this->getTemplatesSpan(),
         )
-      ) 
+      )
     );
   }
 
+  public function getForm($object = null, $options = array())
+  {
+    $form = parent::getForm($object, $options);
+    $form->getWidgetSchema()->getFormFormatter()->setErrorListFormatInARow("  <ul class=\"list-unstyled\">\n%errors%  </ul>\n");
+    return $form;
+  }
 }
