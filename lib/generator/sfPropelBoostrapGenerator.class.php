@@ -20,6 +20,15 @@ class sfPropelBoostrapGenerator extends sfPropelGenerator
     return $params['icon'];
   }
 
+  private function defaultClass($params, $icon = 'btn btn-outline-primary')
+  {
+    if (empty($params['class']))
+    {
+      return $icon;
+    }
+    return $params['class'];
+  }
+
   private function defaultSize($params, $default = '')
   {
     if (empty($params['size']))
@@ -44,19 +53,18 @@ class sfPropelBoostrapGenerator extends sfPropelGenerator
   public function getLinkToAction($actionName, $params, $pk_link = false)
   {
     $action = isset($params['action']) ? $params['action'] : 'List'.sfInflector::camelize($actionName);
-
     $url_params = $pk_link ? '?'.$this->getPrimaryKeyUrlParams() : '\'';
 
-    $params['icon'] = (isset($params['icon'])? $params['icon'] : 'icon-th-list');
-    $params['params']['class'] = (isset($params['params']['class'])? $params['params']['class'] : 'btn');
-    $params['only_icon'] = (isset($params['only_icon']) ? $params['only_icon'] : true);
+    $params['icon'] = $this->defaultIcon($params, 'fa-list-ul');
+    $params['class'] = $this->defaultClass($params, 'btn btn-outline-primary');
+    $params['only_icon'] = (isset($params['only_icon']) ? $params['only_icon'] : false);
     $params['size'] = $this->defaultSize($params);
-    $params['params']['class'] .= ' '.$params['size'];
+    $params['params']['class'] .= $params['class'].' '.$params['size'];
     $title = '__(\''.$params['label'].'\', array(), \''.$this->getI18nCatalogue().'\')';
     $label = (!$params['only_icon'] ? ' \'.'. $title : '\'' );
+    $icon = '<i class="fas '.$params['icon'].'""></i>';
 
-
-    return '[?php echo link_to(\'<i class="'.$params['icon'].'"></i>'.$label.', \''.$this->getModuleName().'/'.$action.$url_params.', '.$this->asPhp($params['params']).') ?]';
+    return '[?php echo link_to(\''.$icon.$label.', \''.$this->getModuleName().'/'.$action.$url_params.', '.$this->asPhp($params['params']).') ?]';
   }
 
 }
