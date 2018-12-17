@@ -99,7 +99,7 @@ abstract class sfModelBootstrapGeneratorHelper extends sfModelGeneratorHelper
   public function renderFormField($field, $attributes)
   {
     if ($attributes instanceof sfOutputEscaper) $attributes = $attributes->getRawValue();
-    $attributes['class'] = 'form-control'.' '.$attributes['class'];
+    $attributes['class'] = 'form-control'.(isset($attributes['class']) ? ' '.$attributes['class'] : '');
     if ($field->hasError()) $attributes['class'] = $attributes['class'].'is-invalid';
     return $field->render($attributes);
   }

@@ -59,7 +59,10 @@ class sfPropelBoostrapGenerator extends sfPropelGenerator
     $params['class'] = $this->defaultClass($params, 'btn btn-outline-primary');
     $params['only_icon'] = (isset($params['only_icon']) ? $params['only_icon'] : false);
     $params['size'] = $this->defaultSize($params);
-    $params['params']['class'] .= $params['class'].' '.$params['size'];
+
+    if (empty($params['params']['class'])) $params['params']['class'] = '';
+
+    $params['params']['class'] .= $params['class'].$params['size'];
     $title = '__(\''.$params['label'].'\', array(), \''.$this->getI18nCatalogue().'\')';
     $label = (!$params['only_icon'] ? ' \'.'. $title : '\'' );
     $icon = '<i class="fas '.$params['icon'].'""></i>';
