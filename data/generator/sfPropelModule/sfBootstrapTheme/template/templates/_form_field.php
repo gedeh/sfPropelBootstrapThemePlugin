@@ -1,7 +1,15 @@
 [?php if ($field->isPartial()): ?]
-  [?php include_partial('<?php echo $this->getModuleName() ?>/'.$name, array('form' => $form, 'attributes' => $attributes instanceof sfOutputEscaper ? $attributes->getRawValue() : $attributes)) ?]
+  [?php include_partial('<?php echo $this->getModuleName() ?>/'.$name, array(
+    'form' => $form,
+    'attributes' => $attributes instanceof sfOutputEscaper
+      ? $attributes->getRawValue()
+      : $attributes)) ?]
 [?php elseif ($field->isComponent()): ?]
-  [?php include_component('<?php echo $this->getModuleName() ?>', $name, array('form' => $form, 'attributes' => $attributes instanceof sfOutputEscaper ? $attributes->getRawValue() : $attributes)) ?]
+  [?php include_component('<?php echo $this->getModuleName() ?>', $name, array(
+      'form' => $form,
+      'attributes' => $attributes instanceof sfOutputEscaper
+        ? $attributes->getRawValue()
+        : $attributes)) ?]
 [?php else: ?]
   <div class="form-group mb-3 [?php if ($form->getValidatorSchema()->offsetExists($name)) echo ($form->getValidator($name)->getOption('required') && !$form[$name]->hasError()) ? 'text-primary' : null ?][?php $form[$name]->hasError() and print 'text-error' ?]">
       <strong>
