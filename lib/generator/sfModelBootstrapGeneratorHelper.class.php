@@ -99,8 +99,12 @@ abstract class sfModelBootstrapGeneratorHelper extends sfModelGeneratorHelper
   public function renderFormField($field, $attributes)
   {
     if ($attributes instanceof sfOutputEscaper) $attributes = $attributes->getRawValue();
-    $attributes['class'] = 'form-control'.(isset($attributes['class']) ? ' '.$attributes['class'] : '');
+
+    $prefix = !($field->getWidget() instanceof sfWidgetFormInputCheckbox) ? 'form-control' : '';
+    $attributes['class'] = $prefix.(isset($attributes['class']) ? ' '.$attributes['class'] : '');
+
     if ($field->hasError()) $attributes['class'] = $attributes['class'].'is-invalid';
+
     return $field->render($attributes);
   }
 }
