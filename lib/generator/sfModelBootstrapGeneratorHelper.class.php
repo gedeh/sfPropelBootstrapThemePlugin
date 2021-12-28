@@ -103,7 +103,7 @@ abstract class sfModelBootstrapGeneratorHelper extends sfModelGeneratorHelper
     $prefix = !($field->getWidget() instanceof sfWidgetFormInputCheckbox) ? 'form-control' : '';
     $attributes['class'] = $prefix.(isset($attributes['class']) ? ' '.$attributes['class'] : '');
 
-    if ($field->hasError()) $attributes['class'] = $attributes['class'].'is-invalid';
+    if ($field->hasError()) $attributes['class'] = $attributes['class'].' '.'is-invalid';
 
     return $field->render($attributes);
   }
