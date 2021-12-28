@@ -11,7 +11,7 @@
         ? $attributes->getRawValue()
         : $attributes)) ?]
 [?php else: ?]
-  <div class="form-group mb-3 [?php if ($form->getValidatorSchema()->offsetExists($name)) echo ($form->getValidator($name)->getOption('required') && !$form[$name]->hasError()) ? 'text-primary' : null ?][?php $form[$name]->hasError() and print 'text-error' ?]">
+  <div class="form-group mb-3 [?php if ($form->getValidatorSchema()->offsetExists($name)) echo ($form->getValidator($name)->getOption('required') && !$form[$name]->hasError()) ? 'text-primary' : null ?][?php $form[$name]->hasError() and print 'text-danger' ?]">
       <strong>
         [?php echo $form[$name]->renderLabel($label, array('class'=>'control-label')) ?]
       </strong>
